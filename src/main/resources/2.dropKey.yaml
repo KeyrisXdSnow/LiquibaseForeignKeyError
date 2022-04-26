@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: dropForeignKey
+      author: keyris
+      validCheckSum: ANY
+      preConditions:
+        - onFail: MARK_RAN
+        - foreignKeyConstraintExists:
+            indexName: fk_Dog_Owner_id
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: Dog
+            constraintName: fk_Dog_Owner_id
+  - changeSet:
+      id: dropIndex
+      author: keyris
+      validCheckSum: ANY
+      preConditions:
+        - onFail: MARK_RAN
+        - indexExists:
+            indexName: fk_Dog_Owner_id
+      changes:
+        -  dropIndex:
+             tableName:  Dog
+             indexName:  fk_Dog_Owner_id
